@@ -1,10 +1,10 @@
 import React from "react"; // Todo lugar que usar a sintaxe JSX, o React precisa estar sendo importado
 import "./App.css";
 
-import lua from "./assets/lua.jpg";
+import TechList from "./components/TechList";
 
 function App() {
-  return <img width="200" src={lua} />;
+  return <TechList />;
 }
 
 export default App;
