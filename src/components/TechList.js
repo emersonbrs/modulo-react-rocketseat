@@ -10,17 +10,40 @@ class TechList extends Component {
   // Para que o componente possa entender a variável de estado passada abaixo
   // é preciso instalar a dependência @babel/plugin-proposal-class-properties -D
   state = {
+    newTech: "",
     techs: ["Node.js", "ReactJS", "React Native"]
   };
 
+  handleInputChange = event => {
+    this.setState({ newTech: event.target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault(); // Previne o comportamento padrão do event
+    this.setState({
+      techs: [...this.state.techs, this.state.newTech],
+      newTech: ""
+    });
+  };
+
   render() {
-    console.log(this.state);
     return (
-      <ul>
-        <li>Node.js</li>
-        <li>ReactJS</li>
-        <li>React Native</li>
-      </ul>
+      // Tag sem nome: Fragment (<>)
+      <>
+        <form onSubmit={this.handleSubmit}>
+          <ul>
+            {this.state.techs.map(tech => (
+              <li key={tech}>{tech}</li>
+            ))}
+          </ul>
+          <input
+            type="text"
+            onChange={this.handleInputChange}
+            value={this.state.newTech}
+          />
+          <button type="submit">Enviar</button>
+        </form>
+      </>
     );
   }
 }
